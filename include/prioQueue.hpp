@@ -2,7 +2,7 @@
 
 #define CLEAR(n) n->next=n->prev=NULL
 #define NEXT(n) n=n->next
-
+#define VERIFY_DIFFERENT(a,b) if ((a)==(b)) return false
 
 template <typename T>
 class prioQueue
@@ -35,23 +35,23 @@ public:
     int size() {return this->length;}
 
     bool push(node * N) {
+        VERIFY_DIFFERENT(N, NULL);
         if (head == NULL) {
             make_head(N);
             length++;
             return true;
         }
-        if (N == head) return false; // already in list
-
+        VERIFY_DIFFERENT(N, head);
         itterator itter = head;
         while(itter->next != NULL && *itter >= *N) {
-            if (N == itter) return false; // already in list
+            VERIFY_DIFFERENT(N, itter);
             NEXT(itter);
         }
+
+        CLEAR(N);
         if (itter == head && *itter < *N) {
             make_head(N);
-        } else if (itter->next == NULL) {
-            CLEAR(N);
-        } else {
+        } else if (itter->next != NULL) {
             pair(N, itter->next);
         }
         pair(itter, N);

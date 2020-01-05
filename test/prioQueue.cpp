@@ -60,7 +60,10 @@ TEST(prioQueue, pushBAgetAB) {
     POINTERS_EQUAL(&A, pq.pop());
     POINTERS_EQUAL(&B, pq.pop()); 
 }
+TEST(prioQueue, pushSkipNull) {
+    CHECK_FALSE(pq.push(NULL));
 
+}
 
 
 

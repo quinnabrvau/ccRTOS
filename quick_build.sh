@@ -5,7 +5,7 @@ mkdir -p build
 pushd build
 
 ## use cmake to generate make files
-cmake ..
+# cmake ..
 if [[ "$?" -ne 0 ]]; then
     exit -1
 fi

@@ -12,4 +12,12 @@ public:
     T operator*() {
         return val;
     }
+    bool operator>(pqNode other)  {return priority <  other.priority;}
+    bool operator>=(pqNode other) {return priority <= other.priority;}
+    bool operator==(pqNode other) {return priority == other.priority;}
+    bool operator<(pqNode other)  {return priority >  other.priority;}
+    bool operator<=(pqNode other) {return priority >= other.priority;}
+    bool operator!=(pqNode other) {return priority != other.priority;}
+
+    bool is(pqNode other) {return (priority == other.priority) && (val == other.val);}
 };

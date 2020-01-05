@@ -15,15 +15,20 @@ private:
     itterator head;
     int length;
 
-    void assign(itterator N, itterator at) {
+    void pair(itterator first, itterator second) {
+        first->next = second;
+        second->prev = first;
+    }
+    void make_head(itterator N) {
         CLEAR(N);
-        at = N;
-        length++;
+        if (head != NULL)
+            pair(N, head);
+        head = N;
     }
 
 public:
     prioQueue() {
-        // head = NULL;
+        head = NULL;
         length = 0;
     }
 
@@ -31,23 +36,34 @@ public:
 
     bool push(node * N) {
         if (head == NULL) {
-            assign(N, head);
+            make_head(N);
+            length++;
             return true;
         }
         if (N == head) return false; // already in list
 
         itterator itter = head;
-        while(itter->next != NULL) {
+        while(itter->next != NULL && *itter >= *N) {
             if (N == itter) return false; // already in list
             NEXT(itter);
         }
-        assign(N, itter->next);
+        if (itter == head && *itter < *N) {
+            make_head(N);
+        } else if (itter->next == NULL) {
+            CLEAR(N);
+        } else {
+            pair(N, itter->next);
+        }
+        pair(itter, N);
+        length++;
         return true;
     }
 
     node * pop() {
+        if (head == NULL) return NULL;
         node * out = head;
         head = head->next;
+        length--;
         return out;
     }
     

@@ -15,3 +15,7 @@ TEST_GROUP(prioQueue)
 TEST(prioQueue, initToEmpty) {
     CHECK_EQUAL(0, pq.size());
 }
+
+TEST(prioQueue, initToEmpty) {
+    CHECK_EQUAL(0, pq.size());
+}

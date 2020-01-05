@@ -1,15 +1,15 @@
 #include <cstddef>
 template <typename T>
-class node
+class pqNode
 {
 public:
-    node *next, *prev;
+    pqNode *next, *prev;
     T val;
-    node() {
+    pqNode() {
         next = NULL;
         prev = NULL;
     }
-    node(T in) {
+    pqNode(T in) {
         next = NULL;
         prev = NULL;
         val = in;

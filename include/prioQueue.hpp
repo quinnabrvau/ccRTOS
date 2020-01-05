@@ -1,9 +1,9 @@
-#include "node.hpp"
+#include "pqNode.hpp"
 
 template <typename T>
 class prioQueue
 {
-    // node<T> *head;
+    // pqNode<T> *head;
     int length;
 
 public:

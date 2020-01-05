@@ -9,5 +9,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: bash quick_build.sh
+    - name: use cmake, generate make files
+      run: cmake .
+    - name: build with make
+      run: make
+    - name: test with make
+      run: make CTEST_OUTPUT_ON_FAILURE=TRUE test

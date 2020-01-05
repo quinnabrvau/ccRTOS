@@ -5,15 +5,7 @@ set( SOURCES
     prioQueue.cpp
 )
 include_directories(
-    ../cpputest/include
-)
-
-## Test lib, can be included in other project
-add_library(testPrioQueue_LIB
-    ${SOURCES}
-)
-target_compile_options(testPrioQueue_LIB
-    PRIVATE -DTESTING
+    ../cpputest/include/CppUTest/
 )
 
 ## Stand alone test executable

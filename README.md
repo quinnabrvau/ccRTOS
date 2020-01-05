@@ -13,6 +13,7 @@ This library implements a basic low overhead priority queue to be used in a C++ 
 * items are gotten from high priority to low priority
 * highest priority is a low number (0 is max priority)
 * supports different type inputs
+* completely header defined
 
 
 

@@ -9,9 +9,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+      
+    - name: Checkout submodules
+      uses: textbook/git-checkout-submodule-action@2.0.0
+      
     - name: use cmake, generate make files
       run: cmake .
+      
     - name: build with make
       run: make
+      
     - name: test with make
       run: make CTEST_OUTPUT_ON_FAILURE=TRUE test
+
+

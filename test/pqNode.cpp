@@ -20,6 +20,6 @@ TEST(pqNode, createNoPrev) {
 }
 TEST(pqNode, templateStorePointer) {
     int val;
-    pqNode<int*> I = pqNode<int*>(&val);
+    pqNode<int*> I = pqNode<int*>(0, &val);
     POINTERS_EQUAL(&val, *I);
 }

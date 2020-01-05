@@ -2,18 +2,12 @@
 template <typename T>
 class pqNode
 {
-public:
-    pqNode *next, *prev;
     T val;
-    pqNode() {
-        next = NULL;
-        prev = NULL;
-    }
-    pqNode(T in) {
-        next = NULL;
-        prev = NULL;
-        val = in;
-    }
+    int priority;
+public:
+    pqNode *next = NULL, *prev = NULL;
+    pqNode() : priority(0) {}
+    pqNode(int in_priority, T in) : val(in), priority(in_priority) {}
     
     T operator*() {
         return val;

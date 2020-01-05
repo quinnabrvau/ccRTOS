@@ -1,7 +1,7 @@
 project(testPrioQueue)
 cmake_minimum_required (VERSION 3.4)
 set( SOURCES
-    node.cpp
+    pqNode.cpp
     prioQueue.cpp
 )
 include_directories(

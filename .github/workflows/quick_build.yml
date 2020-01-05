@@ -12,6 +12,10 @@ jobs:
       
     - name: Checkout submodules
       run: git submodule init -- cpputest
+           pushd cpputest
+           git fetch
+           git checkout master
+           popd
       
     - name: use cmake, generate make files
       run: cmake .

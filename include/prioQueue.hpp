@@ -43,7 +43,7 @@ public:
         }
         VERIFY_DIFFERENT(N, head);
         itterator itter = head;
-        while(itter->next != NULL && *itter >= *N) {
+        while(itter->next != NULL && *itter->next >= *N) {
             VERIFY_DIFFERENT(N, itter);
             NEXT(itter);
         }
@@ -51,7 +51,8 @@ public:
         CLEAR(N);
         if (itter == head && *itter < *N) {
             make_head(N);
-        } else if (itter->next != NULL) {
+        }
+        if (itter->next != NULL && *itter > *N) {
             pair(N, itter->next);
         }
         pair(itter, N);
@@ -66,5 +67,5 @@ public:
         length--;
         return out;
     }
-    
+
 };

@@ -4,9 +4,13 @@ This is me experimenting with creating a real time operating system and using te
 
 ## goals
 #### Short term
-* Priority task queue
-* Tick/Time Tracker
+* ~Priority Queue~
 * Timer
+* Task
+* Scheduler
+  * readyQueue
+  * waitingQueue
+  * activeTask
 
 #### Long Term
 * Isolates Stacks

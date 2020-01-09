@@ -3,6 +3,8 @@ cmake_minimum_required (VERSION 3.4)
 set( SOURCES
     pqNode.cpp
     prioQueue.cpp
+    task.cpp
+    scheduler.cpp
 )
 include_directories(
     ../cpputest/include/CppUTest/

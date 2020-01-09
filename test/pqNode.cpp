@@ -54,6 +54,15 @@ TEST(pqNode, BnotA) {
     CHECK_TRUE(B != A);
     CHECK_TRUE(A != B);
 }
+TEST(pqNode, Aequal0) {
+    CHECK_FALSE(A == 1);
+    CHECK_TRUE(A == 0);
+}
+TEST(pqNode, AnotEqual0) {
+    CHECK_FALSE(A != 0);
+    CHECK_TRUE(A != 1);
+}
+
 
 TEST(pqNode, BisBnotCnotA) {
     CHECK_TRUE(B.is(B));

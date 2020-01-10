@@ -18,5 +18,6 @@ This is me experimenting with creating a real time operating system and using te
 * Semephores
 * Mutex
 * Queues
+* Use macros to auto add all tasks to scheduler
 
 

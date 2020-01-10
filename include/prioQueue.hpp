@@ -16,8 +16,8 @@ private:
     int length;
 
     void pair(itterator first, itterator second) {
-        first->next = second;
-        second->prev = first;
+        if (first != NULL) first->next = second;
+        if (second != NULL) second->prev = first;
     }
     void make_head(itterator N) {
         CLEAR(N);
@@ -68,4 +68,26 @@ public:
         return out;
     }
 
+    node * pop(node *N) {
+        if (head == NULL) {
+            return NULL;
+        }
+        if (N == head) {
+            head = N->next;
+            length--;
+            return N;
+        }
+        itterator itter = head;
+        while(itter != NULL) {
+            if (itter == N) {
+                pair(N->prev, N->next);
+                CLEAR(N);
+                length--;
+                return N;
+            }
+            itter = itter->next;
+        }
+        return NULL; // node not in list
+
+    }
 };

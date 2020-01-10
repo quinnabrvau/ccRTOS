@@ -98,3 +98,30 @@ TEST(prioQueue, popNullAllPopped) {
     POINTERS_EQUAL(NULL, pq.pop());
 }
 
+TEST(prioQueue, popN) {
+    pq.push(&N);
+    POINTERS_EQUAL(&N, pq.pop(&N));
+    CHECK_EQUAL(0, pq.size());
+}
+TEST(prioQueue, popNEmpty) {
+    POINTERS_EQUAL(NULL, pq.pop(&N));
+    CHECK_EQUAL(0, pq.size());
+}
+TEST(prioQueue, popNMissing) {
+    pq.push(&N);
+    POINTERS_EQUAL(NULL, pq.pop(&M));
+    CHECK_EQUAL(1, pq.size());
+}
+TEST(prioQueue, popM) {
+    pq.push(&N); pq.push(&M);
+    POINTERS_EQUAL(&M, pq.pop(&M));
+    CHECK_EQUAL(1, pq.size());
+}
+TEST(prioQueue, popBCA) {
+    pq.push(&A); pq.push(&B); pq.push(&C);
+    POINTERS_EQUAL(&B, pq.pop(&B));
+    POINTERS_EQUAL(&C, pq.pop(&C));
+    POINTERS_EQUAL(&A, pq.pop());
+    CHECK_EQUAL(0, pq.size());
+}
+

@@ -112,15 +112,15 @@ TEST(prioQueue, popNMissing) {
     POINTERS_EQUAL(NULL, pq.pop(&M));
     CHECK_EQUAL(1, pq.size());
 }
-TEST(prioQueue, popM) {
+TEST(prioQueue, popLast) {
     pq.push(&N); pq.push(&M);
     POINTERS_EQUAL(&M, pq.pop(&M));
     CHECK_EQUAL(1, pq.size());
 }
-TEST(prioQueue, popBCA) {
+TEST(prioQueue, popMiddle) {
     pq.push(&A); pq.push(&B); pq.push(&C);
     POINTERS_EQUAL(&B, pq.pop(&B));
-    POINTERS_EQUAL(&C, pq.pop(&C));
+    POINTERS_EQUAL(&C, pq.pop(&C)); // test that the list is still linked
     POINTERS_EQUAL(&A, pq.pop());
     CHECK_EQUAL(0, pq.size());
 }

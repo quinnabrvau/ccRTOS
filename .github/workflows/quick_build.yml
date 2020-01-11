@@ -9,16 +9,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-      
+
     - name: Checkout submodules
       run: git clone https://github.com/quinnabrvau/cpputest.git --single-branch --branch master
-      
+
     - name: use cmake, generate make files
       run: cmake .
-      
+
     - name: build with make
       run: make
-      
+
     - name: test with make
       run: make CTEST_OUTPUT_ON_FAILURE=TRUE test
 

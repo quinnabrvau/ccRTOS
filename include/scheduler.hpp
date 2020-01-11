@@ -24,8 +24,11 @@ public:
             run();
         }
     }
-    void remove() {
+    void remove(task &T) {
 
+    }
+    void remove() {
+        remove(*running);
     }
 
 
@@ -51,6 +54,9 @@ public:
 
     }
     void resume(task &T) {
+        if (&T == running) {
+            return;
+        }
         if (readyStack.push(T.get_node()))
             run();
     }

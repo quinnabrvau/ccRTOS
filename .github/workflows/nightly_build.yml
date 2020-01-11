@@ -1,0 +1,32 @@
+name: CI-Nightly
+
+on:
+  schedule:
+    # run every day at 1AM
+    - cron:  '0 1 * * *'
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - name: install dependencies
+      run:  apt-get update && \
+            apt-get install -y cmake make gcc-8 gcc-6 gcc-arm-none-eabi llvm-8 && \
+            rm -rf /var/lib/apt/lists/*
+
+    - uses: actions/checkout@master
+
+    - name: Checkout submodules
+      run: git clone https://github.com/quinnabrvau/cpputest.git --single-branch --branch master
+
+    - name: build with gcc
+      run: ./scripts/gcc-CC-build.sh
+
+    - name: build with clang
+      run: ./scripts/clang-CC-build.sh
+
+

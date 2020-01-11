@@ -1,4 +1,4 @@
-
+#!/bin/bash
 ## make sure build directory is available
 mkdir -p build
 

@@ -121,7 +121,7 @@ TEST(schedulerRun, suspendTwice) {
 }
 TEST(schedulerRun, resumeA) {
     S.suspend();
-    // S.resume(A);
+    // S.resume(A); // segfaults, need debugger to figure out why
     POINTERS_EQUAL(&A, S.active());
     CHECK_EQUAL(3, S.ready());
 }

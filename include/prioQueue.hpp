@@ -11,15 +11,14 @@ public:
     typedef pqNode<T> node;
 
 private:
-    typedef pqNode<T> * itterator;
-    itterator head;
+    node * head;
     int length;
 
-    void pair(itterator first, itterator second) {
+    void pair(node * first, node * second) {
         if (first != NULL) first->next = second;
         if (second != NULL) second->prev = first;
     }
-    void make_head(itterator N) {
+    void make_head(node * N) {
         CLEAR(N);
         if (head != NULL)
             pair(N, head);
@@ -42,7 +41,7 @@ public:
             return true;
         }
         VERIFY_DIFFERENT(N, head);
-        itterator itter = head;
+        node * itter = head;
         while(itter->next != NULL && *itter->next >= *N) {
             VERIFY_DIFFERENT(N, itter);
             NEXT(itter);
@@ -77,7 +76,7 @@ public:
             length--;
             return N;
         }
-        itterator itter = head;
+        node * itter = head;
         while(itter != NULL) {
             if (itter == N) {
                 pair(N->prev, N->next);
@@ -88,6 +87,30 @@ public:
             itter = itter->next;
         }
         return NULL; // node not in list
-
     }
+
+    class itterator {
+        node * N;
+    public:
+        itterator() : N(NULL) {}
+        itterator(node * in_N) : N(in_N) {};
+        itterator& operator++() {
+            if (N != NULL) {
+                N = N->next;
+            }
+            return *this;
+        }
+        itterator& operator++(int) {return this->operator++();}
+        bool operator==(const itterator& other) const {
+            return N == other.N;
+        }
+        node* operator*() {
+            return N;
+        }
+    };
+
+    itterator start() {return itterator(head);}
+    itterator end() {return itterator();}
+
+
 };

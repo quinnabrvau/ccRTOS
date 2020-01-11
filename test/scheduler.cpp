@@ -87,13 +87,13 @@ TEST(schedulerRun, keepAActive) {
     POINTERS_EQUAL(&A, S.active());
     CHECK_EQUAL(3, S.ready());
 }
-TEST(schedulerRun, startHigherPrioTask) {
-    task max_prio = task(0);
-    S.run();
-    S.add(max_prio);
-    POINTERS_EQUAL(&max_prio, S.active());
-    CHECK_EQUAL(4, S.ready());
-}
+// TEST(schedulerRun, startHigherPrioTask) {
+//     task max_prio = task(0);
+//     S.run();
+//     S.add(max_prio);
+//     POINTERS_EQUAL(&max_prio, S.active());
+//     CHECK_EQUAL(4, S.ready());
+// }
 
 
 

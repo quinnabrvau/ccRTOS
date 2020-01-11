@@ -1,6 +1,7 @@
 #pragma once
 #include "task.hpp"
 #include "prioQueue.hpp"
+#include <vector>
 
 
 class scheduler
@@ -11,16 +12,17 @@ public:
 private:
     prioQueue<task::pTask> readyStack;
     // prioQueue<task::pTask> waitingStack;
-    prioQueue<task::pTask> allTasks;
+    std::vector<task::tNode*> allTasks;
     pTask running = NULL;
     bool started = false;
 public:
-    int total() {return allTasks.size() + readyStack.size();}
+    int total() {return allTasks.size();}
     int ready() {return readyStack.size();}
     int waiting() {return 0;}
 
     void add(task &T) {
-        readyStack.push(T.get_node());
+        if (readyStack.push(T.get_node()))
+            allTasks.push_back(T.get_node());
         if (started) {
             run();
         }

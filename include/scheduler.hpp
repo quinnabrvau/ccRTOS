@@ -6,13 +6,10 @@
 
 class scheduler
 {
-public:
-    typedef task::tNode tNode;
-    typedef task::pTask pTask;
 private:
-    prioQueue<task::pTask> readyStack;
-    // prioQueue<task::pTask> waitingStack;
-    std::vector<task::tNode*> allTasks;
+    prioQueue<pTask> readyStack;
+    // prioQueue<pTask> waitingStack;
+    std::vector<pTask> allTasks;
     pTask running = NULL;
     bool started = false;
 public:
@@ -22,27 +19,52 @@ public:
 
     void add(task &T) {
         if (readyStack.push(T.get_node()))
-            allTasks.push_back(T.get_node());
+            allTasks.push_back(&T);
         if (started) {
             run();
         }
     }
+    void remove() {
+
+    }
+
+
     void start() {
         started = true;
+        run();
     }
     pTask active () {
         return running;
     }
 
-    void suspend(task &T) {
-        readyStack.pop(T.get_node());
+    void suspend() {
+        running = NULL;
+        run();
     }
+    void suspend(task &T) {
+        if (&T == running) {
+            running = NULL;
+            run();
+        } else {
+            readyStack.pop(T.get_node());
+        }
+
+    }
+    void resume(task &T) {
+        if (readyStack.push(T.get_node()))
+            run();
+    }
+
+
     void run() {
         tNode * p_node = readyStack.pop();
-        if (running == NULL) {
+        if (p_node == NULL) {
+            //do nothing;
+        } else if (running == NULL) {
             running = **p_node;
         } else if (*p_node > *running->get_node()) {
             readyStack.push(running->get_node());
+            running = **p_node;
         } else {
             readyStack.push(p_node);
         }

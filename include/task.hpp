@@ -18,5 +18,8 @@ public:
 
 
     tNode* get_node() {return &stackNode;}
-    pTask get_p() {return this;}
+    task* get_p() {return this;}
 };
+
+typedef task::tNode tNode;
+typedef task::pTask pTask;

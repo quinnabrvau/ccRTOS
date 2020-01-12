@@ -8,16 +8,17 @@ public:
     typedef pqNode<pTask> tNode;
 
 private:
+    tNode waitNode = tNode(0, this, true);
     tNode stackNode;
-    const int prio;
 
 public:
 
-    task() : prio(0), stackNode(0,this) {};
-    task(int priority) : prio(priority), stackNode(priority,this) {};
+    task() : stackNode(0, this) {};
+    task(int priority) : stackNode(priority,this) {};
 
 
     tNode* get_node() {return &stackNode;}
+    tNode* get_wait_node() {return &waitNode;}
     task* get_p() {return this;}
 };
 

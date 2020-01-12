@@ -43,6 +43,9 @@ public:
         VERIFY_DIFFERENT(N, head);
         node * itter = head;
         while(itter->next != NULL && *itter->next >= *N) {
+            if (itter == itter->next) {
+                return false;
+            }
             VERIFY_DIFFERENT(N, itter);
             NEXT(itter);
         }
@@ -50,11 +53,12 @@ public:
         CLEAR(N);
         if (itter == head && *itter < *N) {
             make_head(N);
+        } else {
+            if (itter->next != NULL && *itter > *N) {
+                pair(N, itter->next);
+            }
+            pair(itter, N);
         }
-        if (itter->next != NULL && *itter > *N) {
-            pair(N, itter->next);
-        }
-        pair(itter, N);
         length++;
         return true;
     }
@@ -104,12 +108,15 @@ public:
         bool operator==(const itterator& other) const {
             return N == other.N;
         }
+        bool operator!=(const itterator& other) const {
+            return N != other.N;
+        }
         node* operator*() {
             return N;
         }
     };
 
-    itterator start() {return itterator(head);}
+    itterator begin() {return itterator(head);}
     itterator end() {return itterator();}
 
 

@@ -126,11 +126,67 @@ TEST(schedulerRun, resumeActiveNoChangeToState) {
 }
 TEST(schedulerRun, resumeAsuspended) {
     S.suspend();
-    // S.resume(A); // segfaults, need debugger to figure out why
+    S.resume(A);
     POINTERS_EQUAL(&A, S.active());
     CHECK_EQUAL(3, S.ready());
 }
+TEST(schedulerRun, resumeBsuspended) {
+    S.suspend(B);
+    S.resume(B);
+    POINTERS_EQUAL(&A, S.active());
+    CHECK_EQUAL(3, S.ready());
+}
+TEST(schedulerRun, resumeDsuspended) {
+    S.suspend(D);
+    S.resume(D);
+    POINTERS_EQUAL(&A, S.active());
+    CHECK_EQUAL(3, S.ready());
+}
+TEST(schedulerRun, suspendAllResumeD) {
+    S.suspend(A); S.suspend(B); S.suspend(C); S.suspend(D);
+    S.resume(D);
+    POINTERS_EQUAL(&D, S.active());
+    CHECK_EQUAL(0, S.ready());
+}
 
+TEST(schedulerRun, deleteActive) {
+    S.remove();
+    POINTERS_EQUAL(&B, S.active());
+    CHECK_EQUAL(2, S.ready());
+    CHECK_EQUAL(3, S.total());
+}
+
+TEST(schedulerRun, deleteB) {
+    S.remove(B);
+    POINTERS_EQUAL(&A, S.active());
+    CHECK_EQUAL(2, S.ready());
+    CHECK_EQUAL(3, S.total());
+}
+
+TEST(schedulerRun, delayActive1) {
+    S.delay(1);
+    POINTERS_EQUAL(&B, S.active());
+    CHECK_EQUAL(2, S.ready());
+    CHECK_EQUAL(1, S.waiting());
+    CHECK_EQUAL(4, S.total());
+}
+TEST(schedulerRun, delay2tick1) {
+    S.delay(2);
+    S.tick();
+    POINTERS_EQUAL(&B, S.active());
+    CHECK_EQUAL(2, S.ready());
+    CHECK_EQUAL(1, S.waiting());
+    CHECK_EQUAL(4, S.total());
+}
+
+TEST(schedulerRun, delay1tick1resume) {
+    S.delay(1);
+    S.tick();
+    CHECK_EQUAL(3, S.ready());
+    CHECK_EQUAL(0, S.waiting());
+    CHECK_EQUAL(4, S.total());
+    POINTERS_EQUAL(&A, S.active());
+}
 
 
 

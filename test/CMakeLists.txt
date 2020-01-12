@@ -1,6 +1,12 @@
-project(testPrioQueue)
+project(TESTccRTOS)
 cmake_minimum_required (VERSION 3.4)
 set( SOURCES
+    ../include/pqNode.hpp
+    ../include/prioQueue.hpp
+    ../include/task.hpp
+    ../include/scheduler.hpp
+
+
     pqNode.cpp
     prioQueue.cpp
     task.cpp

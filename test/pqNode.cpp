@@ -7,11 +7,13 @@ TEST_GROUP(pqNode)
     pqNode<int> A;
     pqNode<int> B;
     pqNode<int> C;
+    pqNode<int> DEC;
     void setup() {
         N = pqNode<int>();
         A = pqNode<int>(0,1);
         B = pqNode<int>(1,1);
         C = pqNode<int>(1,2);
+        DEC = pqNode<int>(100, 1, true);
     }
     void teardown() {
 
@@ -78,4 +80,43 @@ TEST(pqNode, storePrev) {
     B.prev = &A;
     POINTERS_EQUAL(&A, B.prev);
 }
+
+TEST(pqNode, decFailsNormal) {
+    ///@todo add expect runtime error
+    bool success = A.dec();
+    CHECK_FALSE(success);
+    CHECK_EQUAL(0, A.get_priority());
+}
+
+TEST(pqNode, dec1) {
+    bool success = DEC.dec();
+    CHECK_FALSE(success);
+    CHECK_EQUAL(99, DEC.get_priority());
+}
+TEST(pqNode, dec2) {
+    bool success = DEC.dec(2);
+    CHECK_FALSE(success);
+    CHECK_EQUAL(98, DEC.get_priority());
+}
+TEST(pqNode, dec100) {
+    bool success = DEC.dec(100);
+    CHECK_TRUE(success);
+    CHECK_EQUAL(0, DEC.get_priority());
+}
+TEST(pqNode, dec101) {
+    bool success = DEC.dec(101);
+    CHECK_TRUE(success);
+    CHECK_EQUAL(0, DEC.get_priority());
+}
+TEST(pqNode, setTicks100) {
+    bool success = DEC.set_ticks(100);
+    CHECK_TRUE(success);
+    CHECK_EQUAL(100, DEC.get_priority());
+}
+TEST(pqNode, failSetTicks100) {
+    bool success = A.set_ticks(100);
+    CHECK_FALSE(success);
+    CHECK_EQUAL(0, N.get_priority());
+}
+
 

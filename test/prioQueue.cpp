@@ -127,22 +127,22 @@ TEST(prioQueue, popMiddle) {
 
 TEST(prioQueue, initStartIsEnd) {
     prioQueue<int> pq = prioQueue<int>();
-    CHECK_TRUE(pq.start() == pq.end());
+    CHECK_TRUE(pq.begin() == pq.end());
 }
 TEST(prioQueue, initEndisNull) {
     prioQueue<int> pq = prioQueue<int>();
     POINTERS_EQUAL(NULL, *pq.end());
 }
-TEST(prioQueue, push1StartNotNull) {
+TEST(prioQueue, push1BeginNotNull) {
     pq.push(&N);
-    CHECK_FALSE(pq.start() == pq.end());
+    CHECK_FALSE(pq.begin() == pq.end());
 }
 TEST(prioQueue, push1StartatHead) {
     pq.push(&N);
-    POINTERS_EQUAL(&N, *pq.start());
+    POINTERS_EQUAL(&N, *pq.begin());
 }
 TEST(prioQueue, itterIncCantPassEnd) {
-    auto i = pq.start();
+    auto i = pq.begin();
     ++i;
     POINTERS_EQUAL(NULL, *i);
     i++;
@@ -150,7 +150,7 @@ TEST(prioQueue, itterIncCantPassEnd) {
 }
 TEST(prioQueue, itterInc1) {
     pq.push(&N); pq.push(&M);
-    auto i = pq.start();
+    auto i = pq.begin();
     POINTERS_EQUAL(&N, *i);
     i++;
     POINTERS_EQUAL(&M, *i);
@@ -158,9 +158,9 @@ TEST(prioQueue, itterInc1) {
 
 TEST(prioQueue, itterate) {
     pq.push(&N);
-    POINTERS_EQUAL(&N, *pq.start());
+    POINTERS_EQUAL(&N, *pq.begin());
     pq.push(&A); pq.push(&B); pq.push(&C);
-    auto i = pq.start();
+    auto i = pq.begin();
     POINTERS_EQUAL(&A, *i++);
     POINTERS_EQUAL(&B, *i++);
     POINTERS_EQUAL(&C, *i++);

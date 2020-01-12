@@ -1,5 +1,7 @@
 #!/bin/bash
 
+## create clean build directory
+rm -r clang-cc-build
 mkdir -p clang-cc-build
 
 pushd clang-cc-build

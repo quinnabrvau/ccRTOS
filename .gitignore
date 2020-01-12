@@ -2,3 +2,4 @@ build/
 xcode/
 *sublime*
 hold.txt
+*build/
